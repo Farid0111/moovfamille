@@ -69,3 +69,23 @@
 .vendeur-tips li {
   margin-bottom: 0.35rem;
 }
+
+@media (max-width: 640px) {
+  .vendeur-page h1 {
+    font-size: 1.4rem;
+  }
+  .vendeur-page .intro {
+    font-size: 0.95rem;
+  }
+  .vendeur-actions {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .vendeur-page .action-card {
+    padding: 1.25rem;
+    min-height: auto;
+  }
+  .vendeur-tips {
+    padding: 1rem;
+  }
+}

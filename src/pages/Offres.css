@@ -133,3 +133,27 @@
   color: var(--moov-orange);
   font-weight: 500;
 }
+
+@media (max-width: 640px) {
+  .offres-page h1 {
+    font-size: 1.4rem;
+  }
+  .filtre {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .filtre select {
+    width: 100%;
+    min-height: 44px;
+  }
+  .offre-card {
+    padding: 1rem;
+  }
+  .btn-rejoindre {
+    display: block;
+    text-align: center;
+    padding: 0.65rem 1rem;
+    min-height: 44px;
+    width: 100%;
+  }
+}
