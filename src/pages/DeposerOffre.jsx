@@ -1,9 +1,15 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { addOffre, PRIX_MAX, MONTANT_VENDEUR } from '../data/offres'
+import { addOffre, PRIX_PAR_JOUR, PRIX_MAX, getMontantVendeur } from '../data/offres'
 import './DeposerOffre.css'
 
 const TYPES = ['Jour', 'Hebdo', 'Mois', 'Illimité']
+
+/** Durées possibles : 7 à 30 jours max (24 valeurs). */
+const DUREES_JOURS = Array.from({ length: 24 }, (_, i) => {
+  const jours = 7 + i
+  return { value: jours, label: `${jours} jours` }
+})
 
 export default function DeposerOffre() {
   const navigate = useNavigate()
@@ -13,8 +19,7 @@ export default function DeposerOffre() {
   const [error, setError] = useState('')
   const [form, setForm] = useState({
     type: 'Mois',
-    duree: '',
-    prix: '',
+    dureeJours: 30,
     description: '',
     contactVendeur: '',
     numeroDepot: '',
@@ -28,16 +33,13 @@ export default function DeposerOffre() {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    const prix = Number(form.prix)
-    if (Number.isNaN(prix) || prix < 0 || prix > PRIX_MAX) {
-      setError(`Le prix doit être entre 0 et ${PRIX_MAX.toLocaleString('fr-FR')} FCFA.`)
-      return
-    }
     setLoading(true)
     setError('')
     try {
-      await addOffre({ ...form, prix })
-      setPublishedPrix(prix)
+      const dureeJours = Number(form.dureeJours)
+      const duree = DUREES_JOURS.find((d) => d.value === dureeJours)?.label ?? `${dureeJours} jours`
+      await addOffre({ ...form, duree, dureeJours })
+      setPublishedPrix(dureeJours * PRIX_PAR_JOUR)
       setSent(true)
       setTimeout(() => navigate('/offres'), 2000)
     } catch (err) {
@@ -50,7 +52,7 @@ export default function DeposerOffre() {
     return (
       <div className="deposer-page sent">
         <h1>Offre publiée</h1>
-        <p>Votre offre a bien été enregistrée. Prix affiché : {publishedPrix != null ? publishedPrix.toLocaleString('fr-FR') : form.prix} FCFA. Vous recevrez {MONTANT_VENDEUR.toLocaleString('fr-FR')} FCFA sur votre numéro de dépôt. Maximum 3 acheteurs par groupe. Votre numéro n’est pas affiché aux acheteurs.</p>
+        <p>Votre offre a bien été enregistrée. Le montant que paieront les acheteurs est fixé à {PRIX_PAR_JOUR.toLocaleString('fr-FR')} FCFA par jour restant (ex. {form.dureeJours} jours au départ = {(form.dureeJours * PRIX_PAR_JOUR).toLocaleString('fr-FR')} FCFA). Vous recevrez <strong>90 % du montant</strong> (10 % de commission plateforme) sur votre numéro de dépôt. Ex. pour {(form.dureeJours * PRIX_PAR_JOUR).toLocaleString('fr-FR')} FCFA payés par l'acheteur, vous recevez {getMontantVendeur(form.dureeJours * PRIX_PAR_JOUR).toLocaleString('fr-FR')} FCFA. Maximum 3 acheteurs par groupe. Votre numéro n’est pas affiché aux acheteurs.</p>
         <Link to="/offres">Voir les offres</Link>
       </div>
     )
@@ -60,10 +62,10 @@ export default function DeposerOffre() {
     <div className="deposer-page">
       <h1>Déposer une offre (groupe)</h1>
       <p className="intro">
-        Créez un groupe Moov Famille. Vous fixez votre prix (maximum <strong>{PRIX_MAX.toLocaleString('fr-FR')} FCFA</strong>). Maximum 3 acheteurs par groupe. Votre numéro est enregistré en base de données uniquement et ne sera jamais affiché aux acheteurs. Aucun contact direct.
+        Créez un groupe Moov Famille. Le montant payé par les acheteurs est fixé à <strong>{PRIX_PAR_JOUR.toLocaleString('fr-FR')} FCFA par jour restant</strong> (max {PRIX_MAX.toLocaleString('fr-FR')} FCFA pour 30 jours). Vous choisissez la durée de l'offre (7 à 30 jours). Maximum 3 acheteurs par groupe. Votre numéro est enregistré en base de données uniquement et ne sera jamais affiché aux acheteurs. Aucun contact direct.
       </p>
       <div className="deposer-notice">
-        <strong>Paiement vendeur :</strong> vous recevrez <strong>{MONTANT_VENDEUR.toLocaleString('fr-FR')} FCFA</strong> sur votre numéro de dépôt (sur les {PRIX_MAX.toLocaleString('fr-FR')} FCFA max). Indiquez ci-dessous le numéro sur lequel vous souhaitez recevoir le dépôt.
+        <strong>Paiement vendeur :</strong> vous recevrez <strong>90 % du montant payé par l'acheteur</strong> (la plateforme prélève 10 % de commission). Indiquez ci-dessous le numéro sur lequel vous souhaitez recevoir le dépôt.
       </div>
       {error && <p className="deposer-error">{error}</p>}
       <form onSubmit={handleSubmit} className="deposer-form">
@@ -76,31 +78,19 @@ export default function DeposerOffre() {
           </select>
         </div>
         <div className="field">
-          <label htmlFor="prix">Prix (FCFA) — max {PRIX_MAX.toLocaleString('fr-FR')}</label>
-          <input
-            id="prix"
-            name="prix"
-            type="number"
-            min="0"
-            max={PRIX_MAX}
-            step="100"
-            placeholder="Ex: 6500"
-            value={form.prix}
+          <label htmlFor="dureeJours">Durée de l'offre</label>
+          <select
+            id="dureeJours"
+            name="dureeJours"
+            value={form.dureeJours}
             onChange={handleChange}
             required
-          />
-        </div>
-        <div className="field">
-          <label htmlFor="duree">Durée</label>
-          <input
-            id="duree"
-            name="duree"
-            type="text"
-            placeholder="Ex: 30 jours, 7 jours"
-            value={form.duree}
-            onChange={handleChange}
-            required
-          />
+          >
+            {DUREES_JOURS.map((d) => (
+              <option key={d.value} value={d.value}>{d.label}</option>
+            ))}
+          </select>
+          <small>L'offre sera visible pendant ce nombre de jours à partir de la date de publication.</small>
         </div>
         <div className="field">
           <label htmlFor="description">Description (optionnel)</label>
@@ -124,7 +114,7 @@ export default function DeposerOffre() {
             onChange={handleChange}
             required
           />
-          <small>C’est sur ce numéro que vous recevrez les {MONTANT_VENDEUR.toLocaleString('fr-FR')} FCFA (sur les {PRIX_MAX.toLocaleString('fr-FR')} FCFA). Enregistré en base de données uniquement.</small>
+          <small>C’est sur ce numéro que vous recevrez 90 % du montant (après 10 % de commission) Enregistré en base de données uniquement.</small>
         </div>
         <div className="field">
           <label htmlFor="contactVendeur">Votre contact (téléphone / WhatsApp)</label>

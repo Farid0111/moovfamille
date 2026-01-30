@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { getOffres, PRIX_MAX } from '../data/offres'
+import { getOffres, PRIX_MAX, getJoursRestants, getPrixAffiche } from '../data/offres'
 import { getDemandesCountByOffre, MAX_ACHETEURS_PAR_GROUPE } from '../data/demandes'
 import './Acheteur.css'
 
@@ -45,7 +45,7 @@ export default function Acheteur() {
     <div className="acheteur-page">
       <h1>Espace Acheteur</h1>
       <p className="intro">
-        Parcourez les offres Moov Famille ci-dessous. Chaque vendeur fixe son prix (max <strong>{PRIX_MAX.toLocaleString('fr-FR')} FCFA</strong>). Maximum {MAX_ACHETEURS_PAR_GROUPE} acheteurs par groupe. Rejoignez un groupe — votre numéro est enregistré en base de données uniquement. Aucun contact direct.
+        Parcourez les offres Moov Famille ci-dessous. Le montant à payer est fixé à <strong>250 FCFA par jour restant</strong> (max {PRIX_MAX.toLocaleString('fr-FR')} FCFA pour 30 jours). Maximum {MAX_ACHETEURS_PAR_GROUPE} acheteurs par groupe. Rejoignez un groupe — votre numéro est enregistré en base de données uniquement. Aucun contact direct.
       </p>
 
       <div className="acheteur-filtre">
@@ -67,10 +67,11 @@ export default function Acheteur() {
           {filtrees.map((offre) => {
             const inscrits = counts[offre.id] ?? 0
             const complet = inscrits >= MAX_ACHETEURS_PAR_GROUPE
+            const { libelle: joursRestantsLibelle } = getJoursRestants(offre)
             return (
               <li key={offre.id} className="offre-card">
                 <div className="offre-type">{offre.type}</div>
-                <div className="offre-prix">{(offre.prix ?? 0).toLocaleString('fr-FR')} FCFA</div>
+                <div className="offre-prix">{getPrixAffiche(offre).toLocaleString('fr-FR')} FCFA</div>
                 <div className="offre-duree">{offre.duree}</div>
                 {offre.description && <p className="offre-desc">{offre.description}</p>}
                 <div className="offre-places">
@@ -79,6 +80,7 @@ export default function Acheteur() {
                   </span>
                   {complet && <span className="badge-complet">Complet</span>}
                 </div>
+                <div className="offre-jours-restants">{joursRestantsLibelle}</div>
                 {!complet && (
                   <Link to={`/demande/${offre.id}`} className="btn btn-primary btn-rejoindre">
                     Rejoindre ce groupe

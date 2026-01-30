@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { addDemande, getDemandesCountByOffre, peutRejoindre, MAX_ACHETEURS_PAR_GROUPE } from '../data/demandes'
-import { getOffreById } from '../data/offres'
+import { getOffreById, getPrixAffiche } from '../data/offres'
 import { getNumeroMoovError } from '../utils/numeroMoov'
 import './Demande.css'
 
@@ -117,7 +117,7 @@ export default function Demande() {
     <div className="demande-page">
       <h1>Rejoindre ce groupe</h1>
       <div className="offre-resume">
-        <strong>{offre.type}</strong> — {offre.duree} — {(offre.prix ?? 0).toLocaleString('fr-FR')} FCFA
+        <strong>{offre.type}</strong> — {offre.duree} — {getPrixAffiche(offre).toLocaleString('fr-FR')} FCFA (250 FCFA/jour restant)
         {offre.description && <p>{offre.description}</p>}
       </div>
       <p className="intro">

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { getOffres, PRIX_MAX } from '../data/offres'
+import { getOffres, PRIX_MAX, getJoursRestants, getPrixAffiche } from '../data/offres'
 import { getDemandesCountByOffre, MAX_ACHETEURS_PAR_GROUPE } from '../data/demandes'
 import './Offres.css'
 
@@ -46,7 +46,7 @@ export default function Offres() {
       <div className="offres-header">
         <h1>Offres Moov Famille</h1>
         <p className="intro">
-          Groupes proposés par les vendeurs. Chaque vendeur fixe son prix (max <strong>{PRIX_MAX.toLocaleString('fr-FR')} FCFA</strong>). Maximum {MAX_ACHETEURS_PAR_GROUPE} acheteurs par groupe. Aucun contact direct — les numéros restent en base de données.
+          Groupes proposés par les vendeurs. Le montant à payer est fixé à <strong>250 FCFA par jour restant</strong> (max {PRIX_MAX.toLocaleString('fr-FR')} FCFA pour 30 jours). Maximum {MAX_ACHETEURS_PAR_GROUPE} acheteurs par groupe. Aucun contact direct — les numéros restent en base de données.
         </p>
         <div className="filtre">
           <label htmlFor="type">Type de forfait :</label>
@@ -69,10 +69,11 @@ export default function Offres() {
           {filtrees.map((offre) => {
             const inscrits = counts[offre.id] ?? 0
             const complet = inscrits >= MAX_ACHETEURS_PAR_GROUPE
+            const { libelle: joursRestantsLibelle } = getJoursRestants(offre)
             return (
               <li key={offre.id} className="offre-card">
                 <div className="offre-type">{offre.type}</div>
-                <div className="offre-prix">{(offre.prix ?? 0).toLocaleString('fr-FR')} FCFA</div>
+                <div className="offre-prix">{getPrixAffiche(offre).toLocaleString('fr-FR')} FCFA</div>
                 <div className="offre-duree">{offre.duree}</div>
                 {offre.description && <p className="offre-desc">{offre.description}</p>}
                 <div className="offre-places">
@@ -81,6 +82,7 @@ export default function Offres() {
                   </span>
                   {complet && <span className="badge-complet">Complet</span>}
                 </div>
+                <div className="offre-jours-restants">{joursRestantsLibelle}</div>
                 {!complet && (
                   <Link to={`/demande/${offre.id}`} className="btn btn-primary btn-rejoindre">
                     Rejoindre ce groupe
