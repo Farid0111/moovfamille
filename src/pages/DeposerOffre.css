@@ -1,0 +1,127 @@
+.deposer-page {
+  max-width: 520px;
+}
+
+.deposer-page h1 {
+  font-size: 1.75rem;
+  margin-bottom: 0.5rem;
+  color: var(--text);
+}
+
+.deposer-page .intro {
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+
+.deposer-notice {
+  background: rgba(0, 135, 81, 0.08);
+  border: 1px solid rgba(0, 135, 81, 0.25);
+  border-radius: var(--radius);
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  font-size: 0.95rem;
+  color: var(--text);
+}
+
+.deposer-notice strong {
+  color: var(--benin-green);
+}
+
+.deposer-error {
+  color: #b91c1c;
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+  padding: 0.5rem 0.75rem;
+  background: rgba(185, 28, 28, 0.08);
+  border-radius: 8px;
+}
+
+.deposer-form {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+}
+
+.deposer-page .field {
+  margin-bottom: 1.25rem;
+}
+
+.deposer-page .field label {
+  display: block;
+  font-weight: 500;
+  color: var(--text);
+  margin-bottom: 0.4rem;
+  font-size: 0.95rem;
+}
+
+.deposer-page .field input,
+.deposer-page .field select,
+.deposer-page .field textarea {
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--card);
+  color: var(--text);
+  font-size: 1rem;
+}
+
+.deposer-page .field input:focus,
+.deposer-page .field select:focus,
+.deposer-page .field textarea:focus {
+  outline: none;
+  border-color: var(--benin-green);
+  box-shadow: 0 0 0 3px rgba(0, 135, 81, 0.15);
+}
+
+.deposer-page .form-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.deposer-page .form-actions .btn {
+  padding: 0.65rem 1.25rem;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 1rem;
+  border: none;
+  text-decoration: none;
+}
+
+.deposer-page .form-actions .btn-primary {
+  background: var(--benin-green);
+  color: white;
+}
+
+.deposer-page .form-actions .btn-primary:hover {
+  background: #006b42;
+}
+
+.deposer-page .form-actions .btn-secondary {
+  background: var(--bg);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+}
+
+.deposer-page.sent {
+  text-align: center;
+  padding: 2rem;
+}
+
+.deposer-page.sent h1 {
+  color: var(--benin-green);
+  margin-bottom: 1rem;
+}
+
+.deposer-page.sent p {
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+
+.deposer-page.sent a {
+  color: var(--benin-green);
+  font-weight: 600;
+}

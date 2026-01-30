@@ -1,0 +1,71 @@
+.vendeur-page {
+  max-width: 720px;
+}
+
+.vendeur-page h1 {
+  font-size: 1.75rem;
+  margin-bottom: 0.75rem;
+  color: var(--text);
+}
+
+.vendeur-page .intro {
+  color: var(--text-muted);
+  margin-bottom: 2rem;
+}
+
+.vendeur-actions {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.vendeur-page .action-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  text-decoration: none;
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.vendeur-page .action-card:hover {
+  border-color: var(--benin-green);
+  box-shadow: var(--shadow);
+  text-decoration: none;
+  color: var(--text);
+}
+
+.vendeur-page .action-card h2 {
+  color: var(--benin-green);
+}
+
+.vendeur-page .action-link {
+  color: var(--benin-green);
+}
+
+.vendeur-tips {
+  background: rgba(0, 135, 81, 0.06);
+  border: 1px solid rgba(0, 135, 81, 0.2);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+}
+
+.vendeur-tips h3 {
+  font-size: 1rem;
+  margin-bottom: 0.75rem;
+  color: var(--benin-green);
+}
+
+.vendeur-tips ul {
+  padding-left: 1.25rem;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.vendeur-tips li {
+  margin-bottom: 0.35rem;
+}

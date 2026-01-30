@@ -1,0 +1,134 @@
+.acheteur-page {
+  max-width: 720px;
+}
+
+.acheteur-page h1 {
+  font-size: 1.75rem;
+  margin-bottom: 0.75rem;
+  color: var(--text);
+}
+
+.acheteur-page .intro {
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+}
+
+.acheteur-filtre {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+
+.acheteur-filtre label {
+  font-weight: 500;
+  color: var(--text);
+}
+
+.acheteur-filtre select {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--card);
+  color: var(--text);
+}
+
+.acheteur-empty {
+  text-align: center;
+  padding: 2rem;
+  background: var(--card);
+  border-radius: var(--radius);
+  border: 1px dashed var(--border);
+}
+
+.acheteur-empty p {
+  color: var(--text-muted);
+}
+
+.acheteur-offres-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.acheteur-page .offre-card {
+  background: var(--card-dark);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  color: #F1F5F9;
+}
+
+.acheteur-page .offre-type {
+  font-weight: 700;
+  color: var(--moov-orange-light);
+  font-size: 1.1rem;
+  margin-bottom: 0.25rem;
+}
+
+.acheteur-page .offre-prix {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #F8FAFC;
+  margin-bottom: 0.25rem;
+}
+
+.acheteur-page .offre-duree {
+  color: #94A3B8;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.acheteur-page .offre-desc {
+  color: #94A3B8;
+  font-size: 0.95rem;
+  margin-bottom: 0.75rem;
+}
+
+.acheteur-page .offre-places {
+  font-size: 0.95rem;
+  margin-bottom: 0.75rem;
+  color: #CBD5E1;
+}
+
+.acheteur-page .offre-places .complet,
+.acheteur-page .badge-complet {
+  color: #94A3B8;
+}
+
+.acheteur-page .badge-complet {
+  display: inline-block;
+  margin-left: 0.5rem;
+  padding: 0.2rem 0.5rem;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.acheteur-page .btn-rejoindre {
+  display: inline-block;
+  margin-bottom: 0.75rem;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  background: var(--moov-orange);
+  color: white;
+  border: none;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.acheteur-page .btn-rejoindre:hover {
+  text-decoration: none;
+  background: var(--moov-orange-dark);
+  transform: translateY(-1px);
+}
+
+.acheteur-page .offre-date {
+  font-size: 0.8rem;
+  color: #64748B;
+}
