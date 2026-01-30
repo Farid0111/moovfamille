@@ -7,6 +7,7 @@ import Offres from './pages/Offres'
 import Demande from './pages/Demande'
 import DeposerOffre from './pages/DeposerOffre'
 import Contact from './pages/Contact'
+import NotFound from './pages/NotFound'
 
 export default function App() {
   return (
@@ -20,6 +21,7 @@ export default function App() {
         <Route path="/demande/:offreId" element={<Demande />} />
         <Route path="/deposer-offre" element={<DeposerOffre />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Layout>
   )
