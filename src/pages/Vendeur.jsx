@@ -12,7 +12,7 @@ export default function Vendeur() {
         <strong>Commission plateforme :</strong> la plateforme prélève <strong>10 %</strong> de commission sur le montant payé par l'acheteur. Vous recevez <strong>90 %</strong> du montant sur le numéro de dépôt que vous indiquez (ex. pour 7 500 FCFA payés par l'acheteur, vous recevez 6 750 FCFA).
       </div>
       <div className="vendeur-actions">
-        <Link to="/deposer-offre" className="action-card">
+        <Link to="/deposer-offre" className="action-card action-card--blink">
           <span className="action-icon">➕</span>
           <h2>Déposer une offre (groupe)</h2>
           <p>Publiez un groupe : type, durée (7 à 30 jours) et numéro pour recevoir le dépôt. Le montant payé par les acheteurs = 250 FCFA × jours restants. Vous recevez <strong>90 %</strong> du montant (10 % de commission plateforme). Votre contact est stocké en base de données uniquement.</p>

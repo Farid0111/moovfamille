@@ -54,6 +54,27 @@
   color: var(--text);
 }
 
+/* Carte « Déposer une offre » : clignotement pour attirer l'œil du vendeur */
+@keyframes vendeur-card-blink {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(0, 135, 81, 0.4);
+    border-color: rgba(0, 135, 81, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 20px 4px rgba(0, 135, 81, 0.35);
+    border-color: var(--benin-green);
+  }
+}
+
+.vendeur-page .action-card--blink {
+  animation: vendeur-card-blink 2s ease-in-out infinite;
+}
+
+.vendeur-page .action-card--blink:hover {
+  animation: none;
+  box-shadow: 0 4px 12px rgba(0, 135, 81, 0.2);
+}
+
 .vendeur-page .action-card h2 {
   color: var(--benin-green);
 }
