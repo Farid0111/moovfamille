@@ -1,5 +1,14 @@
 import { Link } from 'react-router-dom'
 import './Home.css'
+import avis1 from '../assets/avis/avis-1.png'
+import avis2 from '../assets/avis/avis-2.png'
+import avis3 from '../assets/avis/avis-3.png'
+import avis4 from '../assets/avis/avis-4.png'
+import avis5 from '../assets/avis/avis-5.png'
+import avis6 from '../assets/avis/avis-6.png'
+import avis7 from '../assets/avis/avis-7.png'
+
+const avisPhotos = [avis1, avis2, avis3, avis4, avis5, avis6, avis7]
 
 export default function Home() {
   return (
@@ -31,6 +40,21 @@ export default function Home() {
             <p>Créez un groupe et choisissez la durée (7 à 30 jours). Le montant payé par les acheteurs est fixé à 250 FCFA par jour restant. Votre numéro n’est jamais affiché aux acheteurs. Aucun chat ni contact direct.</p>
             <span className="card-link">Accéder à l’espace vendeur →</span>
           </Link>
+        </div>
+      </section>
+
+      <section className="avis">
+        <h2>Avis des utilisateurs</h2>
+        <p className="avis-intro">Ce que disent les utilisateurs de Moov Famille au Bénin.</p>
+        <div className="avis-photos">
+          {avisPhotos.map((src, i) => (
+            <img
+              key={i}
+              src={src}
+              alt={`Avis Moov Famille ${i + 1}`}
+              className="avis-photo"
+            />
+          ))}
         </div>
       </section>
 

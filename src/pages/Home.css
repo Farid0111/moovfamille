@@ -126,6 +126,37 @@
   color: var(--moov-orange);
 }
 
+/* Section Avis */
+.home .avis h2 {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+  color: var(--text);
+}
+
+.avis-intro {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin-bottom: 1.5rem;
+}
+
+.avis-photos {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.avis-photo {
+  display: block;
+  max-width: 100%;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  vertical-align: middle;
+}
+
 .info h2 {
   font-size: 1.25rem;
   margin-bottom: 1rem;
@@ -182,7 +213,8 @@
 
 @media (max-width: 480px) {
   .roles h2,
-  .info h2 {
+  .info h2,
+  .home .avis h2 {
     font-size: 1.1rem;
   }
 }
